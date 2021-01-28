@@ -1398,6 +1398,7 @@ class KalmanFilter(object):
 
         # Actual EM iterations
         for i in range(n_iter):
+            # E-step
             (predicted_state_means, predicted_state_covariances,
              kalman_gains, filtered_state_means,
              filtered_state_covariances) = (
@@ -1421,6 +1422,8 @@ class KalmanFilter(object):
                 smoothed_state_covariances,
                 kalman_smoothing_gains
             )
+
+            # M-step
             (self.transition_matrices,  self.observation_matrices,
              self.transition_offsets, self.observation_offsets,
              self.transition_covariance, self.observation_covariance,
@@ -1528,7 +1531,7 @@ class KalmanFilter(object):
 
     def _parse_observations(self, obs):
         """Safely convert observations to their expected format"""
-        obs = np.ma.atleast_2d(obs)
+        # obs = np.ma.atleast_2d(obs)
         if obs.shape[0] == 1 and obs.shape[1] > 1:
             obs = obs.T
         return obs

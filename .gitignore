@@ -6,3 +6,6 @@ build/
 dist/
 doc/build/
 pykalman.egg-info/
+
+*.xml
+*.iml
